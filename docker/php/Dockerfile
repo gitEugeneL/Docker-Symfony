@@ -3,6 +3,11 @@ FROM php:8.2.0-fpm-alpine
 # Install packages
 RUN apk add --no-cache curl git build-base zlib-dev oniguruma-dev autoconf bash
 
+# Install Symfony-cli
+RUN apk add --no-cache bash
+RUN curl -1sLf 'https://dl.cloudsmith.io/public/symfony/stable/setup.alpine.sh' | bash
+RUN apk add symfony-cli
+
 # Configure non-root user.
 ARG PUID=1000
 ARG PGID=1000
