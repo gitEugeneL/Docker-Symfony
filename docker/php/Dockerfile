@@ -2,6 +2,11 @@ FROM php:8.2.0-fpm-alpine
 
 # Install packages
 RUN apk add --no-cache curl git build-base zlib-dev oniguruma-dev autoconf bash
+RUN apk add --update linux-headers
+
+# Install Xdebug
+RUN pecl install xdebug && docker-php-ext-enable xdebug;
+COPY ./docker/php/xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
 
 # Install Symfony-cli
 RUN apk add --no-cache bash
